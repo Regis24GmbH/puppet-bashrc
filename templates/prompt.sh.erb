@@ -13,6 +13,11 @@
 #
 #this file is responsible for setting the bash shell prompt for a user. it builds the prompt from values
 # fed to the bashrc module
+if [[ ! -t 1 ]]; then
+  # No TTY, pretend we're a vt100 so tput won't complain.
+  export TERM=vt100
+fi
+
 <% if enablecolor == true -%>
 #Enable Colors
 reset=$(tput sgr0)
