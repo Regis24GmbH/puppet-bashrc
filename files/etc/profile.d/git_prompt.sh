@@ -86,6 +86,11 @@
 # the colored output of "git status -sb" and are available only when
 # using __git_ps1 for PROMPT_COMMAND or precmd.
 
+if [ -z "$BASH_VERSION"  ]; then
+    return
+fi
+
+
 # check whether printf supports -v
 __git_printf_supports_v=
 printf -v __git_printf_supports_v -- '%s' yes >/dev/null 2>&1

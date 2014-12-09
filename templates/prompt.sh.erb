@@ -13,6 +13,17 @@
 #
 #this file is responsible for setting the bash shell prompt for a user. it builds the prompt from values
 # fed to the bashrc module
+
+# Check for interactive bash and that we haven't already been sourced.
+if [ -n "$BASH_VERSION" -a -n "$PS1" -a -z "$BASH_COMPLETION_COMPAT_DIR" ]; then
+
+if [[ ! -t 1 ]]; then
+    # No TTY, pretend we're a vt100 so tput won't complain.
+    export TERM=vt100
+fi
+
+# Only for interactive sessions
+if [[ $- == *i* ]]; then
 <% if enablecolor == true -%>
 #Enable Colors
 reset=$(tput sgr0)
@@ -60,4 +71,7 @@ if [ $UID -eq 0 ]; then
   export PS1="\[$red\]<%= left -%><%=middle-%><%=right-%>\[$red\]]\[$reset\]# "
 else
   export PS1="<%= left -%><%=middle-%><%=right-%>]\$ "
+fi
+
+fi
 fi

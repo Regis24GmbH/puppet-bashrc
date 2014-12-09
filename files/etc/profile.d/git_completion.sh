@@ -26,6 +26,11 @@
 #    3) Consider changing your PS1 to also show the current branch,
 #       see git-prompt.sh for details.
 
+# Check for interactive bash and that we haven't already been sourced.
+if [ -z "$BASH_VERSION" ]; then
+    return
+fi
+
 case "$COMP_WORDBREAKS" in
 *:*) : great ;;
 *)   COMP_WORDBREAKS="$COMP_WORDBREAKS:"
